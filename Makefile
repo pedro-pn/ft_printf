@@ -7,7 +7,7 @@ NAME = libftprintf.a
 
 LIBFT = ./libft/libft.a
 
-FLAG = -Werror -Wextra -Wall
+FLAG = -g -Werror -Wextra -Wall
 
 all: ${NAME}
 

@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 16:59:40 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 20:58:35 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*u_conv(va_list arg);
 char	*x_conv(va_list arg);
 char	*X_conv(va_list arg);
 char	*perc_conv(void);
-void	fill_output(const char *format, char **inputs, va_list args, char **s);
-char	*conv_args(va_list args, char **inputs, int *i_format);
+void	fill_output(const char *format, char ***inputs, va_list args, char **s);
+char	*conv_args(va_list args, char ***inputs, int *i_format);
 
 #endif

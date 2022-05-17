@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 19:23:27 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 21:22:54 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@ int	ft_printf(const char *format, ...)
 	int		n_input;
 	char	*output;
 	int		len_out;
-	int		index;
 
 	va_start(args, format);
-	index = 0;
 	n_input = count_input(format); // contar numero de %
-	inputs = malloc(sizeof(char *) * n_input); // alocar ponteiros para cada %
+	inputs = malloc(sizeof(char *) * (n_input + 1)); // alocar ponteiros para cada %
+	inputs[n_input] = NULL;
 	fill_inputs(&inputs, format);
 	output = ft_calloc(1, sizeof(char));
-	fill_output(format, inputs, args, &output);
-	len_out = ft_strlen(output);
+	fill_output(format, &inputs, args, &output);
+	len_out = (int) ft_strlen(output);
 	ft_putstr_fd(output, 1);
 	free(output);
-	n_input--;
+	inputs = inputs - n_input;
 	while (n_input >= 0)
 	{
 		free(inputs[n_input]);
@@ -50,8 +49,10 @@ int count_input(const char *f_string)
 	counter = 0;
 	while (f_string[index])
 	{
-		if (f_string[index] == '%')
+		if (f_string[index] == '%') 
 			counter++;
+		if (ft_strnstr(&f_string[index], "%%", 2))
+			index++;
 		index++;
 	}
 	return (counter);
@@ -84,7 +85,7 @@ void	fill_inputs(char ***inputs, const char *format)
 	}
 }
 
-void	fill_output(const char *format, char **inputs, va_list args, char **s)
+void	fill_output(const char *format, char ***inputs, va_list args, char **s)
 {
 	int		i_format;
 	int		start;
@@ -107,34 +108,35 @@ void	fill_output(const char *format, char **inputs, va_list args, char **s)
 				start = -1;
 			}
 			if (format[i_format] == '%')
-				*s = ft_strjoin(*s, conv_args(args, inputs, &i_format));
+				*s = ft_strjoin(*s, conv_args(args, &*inputs, &i_format));
 		}
 		i_format++;
 	}
 }
 
-char	*conv_args(va_list args, char **inputs, int *i_format)
+char	*conv_args(va_list args, char ***inputs, int *i_format)
 {
-	static int	index = 0;
+	char	*output;
 
-	index++;
-	*i_format += ft_strlen(inputs[index - 1] + 1);
-	if (ft_strrchr(inputs[index - 1], 'c'))
-		return (c_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 's'))
-		return (s_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 'p'))
-		return (p_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 'i') 
-			|| ft_strrchr(inputs[index - 1], 'd'))
-		return (id_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 'u'))
-		return (u_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 'x'))
-		return (x_conv(args));
-	else if (ft_strrchr(inputs[index - 1], 'X'))
-		return (X_conv(args));
-	else if (ft_strrchr(inputs[index - 1], '%'))
-		return (perc_conv());
-	return (NULL);
+	output = NULL;
+	*i_format += (ft_strlen(**inputs) - 1);
+	if (ft_strrchr(**inputs, 'c'))
+		output = (c_conv(args));
+	else if (ft_strrchr(**inputs, 's'))
+		output = (s_conv(args));
+	else if (ft_strrchr(**inputs, 'p'))
+		output = (p_conv(args));
+	else if (ft_strrchr(**inputs, 'i') 
+			|| ft_strrchr(**inputs, 'd'))
+		output = (id_conv(args));
+	else if (ft_strrchr(**inputs, 'u'))
+		output = (u_conv(args));
+	else if (ft_strrchr(**inputs, 'x'))
+		output = (x_conv(args));
+	else if (ft_strrchr(**inputs, 'X'))
+		output = (X_conv(args));
+	else if (ft_strrchr(**inputs, '%'))
+		output = perc_conv();
+	(*inputs)++;
+	return (output);
 }
