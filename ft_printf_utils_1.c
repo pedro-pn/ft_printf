@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/13 22:38:25 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:20:29 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*id_conv(va_list arg) //%d or %i
 	return (ft_itoa(va_arg(arg, int)));
 }
 
-char	*u_conv(va_list arg)
+char	*u_conv(va_list arg) // %u
 {
 	return (ft_utoa(va_arg(arg, unsigned int)));
 }
