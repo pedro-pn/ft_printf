@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 16:20:29 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:59:35 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*p_conv(va_list arg) // %p
 	output[0] = '0';
 	output[1] = 'x';
 	n = (unsigned long int) va_arg(arg, void *);
-	ft_putnbr_base(n, HEXADECIMAL_X, &output);
+	ft_putnbr_base(n, HEXADECIMAL_x, &output);
 	return (output);
 }
 
