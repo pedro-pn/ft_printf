@@ -14,11 +14,11 @@
 
 char	*c_conv(va_list arg) // %c
 {
-	char	c;
-	char	*out;
+	unsigned char	c;
+	char			*out;
 
-	c = va_arg(arg, int);
-	out = ft_calloc(2, sizeof(char));
+	c = (unsigned char) va_arg(arg, int);
+	out = malloc(2 * sizeof(c));
 	out[0] = c;
 	out [1] = 0;
 	return (out);
@@ -27,9 +27,17 @@ char	*c_conv(va_list arg) // %c
 char	*s_conv(va_list arg) // %s
 {
 	char	*str;
-	
+	char	*output;
+
+	output = NULL;
 	str = va_arg(arg, char *);
-	return (str);
+	if (!str)
+	{
+		output = ft_strdup("(null)");
+		return (output);
+	}
+	output = ft_strdup(str);
+	return (output);
 }
 
 char	*p_conv(va_list arg) // %p
