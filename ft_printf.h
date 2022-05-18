@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...);
 int count_input(const char *f_string);
 void	fill_inputs(char ***inputs, const char *format);
 char	*hex_concat(char *src, char c);
-void	ft_putnbr_base(long long int nbr, char *base, char **output);
+void	ft_putnbr_base(unsigned int nbr, char *base, char **output);
 int	check_base(char *base);
 char	*p_conv(va_list arg);
 char	*c_conv(va_list arg);

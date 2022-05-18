@@ -34,10 +34,10 @@ int	check_base(char *base)
 	return (counter);
 }
 
-void	ft_putnbr_base(long long int nbr, char *base, char **output) //%X or %x
+void	ft_putnbr_base(unsigned int nbr, char *base, char **output) //%X or %x
 {
 	int							mod;
-	long long int				quotient;
+	unsigned int				quotient;
 	int							base_num;
 
 	base_num = check_base(base);
