@@ -75,20 +75,24 @@ char	*hex_concat(char *src, char c)
 	return (out);
 }
 
-char	*x_conv(va_list arg)
+void	x_conv(va_list arg, int *l_out)
 {
 	char	*output;
 
 	output = NULL;	
 	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_x, &output);
-	return (output);
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }
 
-char	*X_conv(va_list arg)
+void	X_conv(va_list arg, int *l_out)
 {
 	char	*output;
-	
-	output = NULL;
+
+	output = NULL;	
 	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_X, &output);
-	return (output);
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }

@@ -12,19 +12,16 @@
 
 #include "ft_printf.h"
 
-char	*c_conv(va_list arg) // %c
+void	c_conv(va_list arg, int *l_out) // %c
 {
 	unsigned char	c;
-	char			*out;
 
 	c = (unsigned char) va_arg(arg, int);
-	out = malloc(2 * sizeof(c));
-	out[0] = c;
-	out [1] = 0;
-	return (out);
+	(*l_out)++;
+	ft_putchar_fd(c, 1);
 }
 
-char	*s_conv(va_list arg) // %s
+void	s_conv(va_list arg, int *l_out) // %s
 {
 	char	*str;
 	char	*output;
@@ -34,31 +31,56 @@ char	*s_conv(va_list arg) // %s
 	if (!str)
 	{
 		output = ft_strdup("(null)");
-		return (output);
+		ft_putstr_fd(output, 1);
+		(*l_out) += ft_strlen(output);
+		free(output);
+		return ;
 	}
 	output = ft_strdup(str);
-	return (output);
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }
 
-char	*p_conv(va_list arg) // %p
+void	p_conv(va_list arg, int *l_out) // %p
 {
 	unsigned long int	n;
 	char				*output;
 
-	output = calloc(3, sizeof(char));
+	n = (unsigned long int) va_arg(arg, void *);
+	if (!n)
+	{
+		output = ft_strdup("(nil)");
+		ft_putstr_fd(output, 1);
+		(*l_out) += ft_strlen(output);
+		free(output);
+		return ;
+	}
+	output = ft_calloc(3, sizeof(char));
 	output[0] = '0';
 	output[1] = 'x';
-	n = (unsigned long int) va_arg(arg, void *);
-	ft_putnbr_base(n, HEXADECIMAL_x, &output);
-	return (output);
+	ft_putnbr_base_l(n, HEXADECIMAL_x, &output);
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }
 
-char	*id_conv(va_list arg) //%d or %i
+void	id_conv(va_list arg, int *l_out) //%d or %i
 {
-	return (ft_itoa(va_arg(arg, int)));
+	char	*output;
+
+	output = ft_itoa(va_arg(arg, int));
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }
 
-char	*u_conv(va_list arg) // %u
+void	u_conv(va_list arg, int *l_out) // %u
 {
-	return (ft_utoa(va_arg(arg, unsigned int)));
+	char	*output;
+
+	output = ft_utoa(va_arg(arg, unsigned int));
+	ft_putstr_fd(output, 1);
+	(*l_out) += ft_strlen(output);
+	free(output);
 }

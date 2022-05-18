@@ -17,19 +17,15 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	char	**inputs;
 	int		n_input;
-	char	*output;
 	int		len_out;
 
+	len_out = 0;
 	va_start(args, format);
 	n_input = count_input(format); // contar numero de %
 	inputs = malloc(sizeof(char *) * (n_input + 1)); // alocar ponteiros para cada %
 	inputs[n_input] = NULL;
 	fill_inputs(&inputs, format);
-	output = ft_calloc(1, sizeof(char));
-	fill_output(format, &inputs, args, &output);
-	len_out = (int) ft_strlen(output);
-	ft_putstr_fd(output, 1);
-	free(output);
+	m_output(format, &inputs, args, &len_out);
 	inputs = inputs - n_input;
 	while (n_input >= 0)
 	{
@@ -85,7 +81,7 @@ void	fill_inputs(char ***inputs, const char *format)
 	}
 }
 
-void	fill_output(const char *format, char ***inputs, va_list args, char **s)
+void	m_output(const char *format, char ***inputs, va_list args, int *l_out)
 {
 	int		i_format;
 	int		start;
@@ -104,39 +100,35 @@ void	fill_output(const char *format, char ***inputs, va_list args, char **s)
 				end = i_format;
 				if (!format[i_format + 1])
 					end ++;
-				*s = ft_strjoin(*s, ft_substr(format, start, end - start));
+				output(format, start, end, l_out);
 				start = -1;
 			}
 			if (format[i_format] == '%')
-				*s = ft_strjoin(*s, conv_args(args, &*inputs, &i_format));
+				conv_args(args, &*inputs, &i_format, l_out);
 		}
 		i_format++;
 	}
 }
 
-char	*conv_args(va_list args, char ***inputs, int *i_format)
+void	conv_args(va_list args, char ***inputs, int *i_format, int *l_out)
 {
-	char	*output;
-
-	output = NULL;
 	*i_format += (ft_strlen(**inputs) - 1);
 	if (ft_strrchr(**inputs, 'c'))
-		output = (c_conv(args));
+		c_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 's'))
-		output = (s_conv(args));
+		s_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 'p'))
-		output = (p_conv(args));
+		p_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 'i') 
 			|| ft_strrchr(**inputs, 'd'))
-		output = (id_conv(args));
+		id_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 'u'))
-		output = (u_conv(args));
+		u_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 'x'))
-		output = (x_conv(args));
+		x_conv(args, l_out);
 	else if (ft_strrchr(**inputs, 'X'))
-		output = (X_conv(args));
+		X_conv(args, l_out);
 	else if (ft_strrchr(**inputs, '%'))
-		output = perc_conv();
+		perc_conv(l_out);
 	(*inputs)++;
-	return (output);
 }
