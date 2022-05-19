@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:03:00 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 18:46:38 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:50:07 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,28 @@ char	*hex_concat(char *src, char c)
 	return (out);
 }
 
-void	x_conv(va_list arg, int *l_out)
+int	x_conv(va_list arg)
 {
 	char	*output;
+	int		l_out;
 
 	output = NULL;	
 	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_x, &output);
 	ft_putstr_fd(output, 1);
-	(*l_out) += ft_strlen(output);
+	l_out = ft_strlen(output);
 	free(output);
+	return (l_out);
 }
 
-void	X_conv(va_list arg, int *l_out)
+int	X_conv(va_list arg)
 {
 	char	*output;
+	int		l_out;
 
 	output = NULL;	
 	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_X, &output);
 	ft_putstr_fd(output, 1);
-	(*l_out) += ft_strlen(output);
+	l_out = ft_strlen(output);
 	free(output);
+	return (l_out);
 }

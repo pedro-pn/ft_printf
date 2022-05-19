@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 18:18:13 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:42:43 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,35 +100,37 @@ void	m_output(const char *format, char ***inputs, va_list args, int *l_out)
 				end = i_format;
 				if (!format[i_format + 1])
 					end ++;
-				output(format, start, end, l_out);
+				(*l_out) += output(format, start, end);
 				start = -1;
 			}
 			if (format[i_format] == '%')
-				conv_args(args, &*inputs, &i_format, l_out);
+				(*l_out) += conv_args(args, &*inputs, &i_format);
 		}
 		i_format++;
 	}
 }
 
-void	conv_args(va_list args, char ***inputs, int *i_format, int *l_out)
+int	conv_args(va_list args, char ***inputs, int *i_format)
 {
+	int	l_out;
 	*i_format += (ft_strlen(**inputs) - 1);
 	if (ft_strrchr(**inputs, 'c'))
-		c_conv(args, l_out);
+		l_out = c_conv(args);
 	else if (ft_strrchr(**inputs, 's'))
-		s_conv(args, l_out);
+		l_out = s_conv(args);
 	else if (ft_strrchr(**inputs, 'p'))
-		p_conv(args, l_out);
+		l_out = p_conv(args);
 	else if (ft_strrchr(**inputs, 'i') 
 			|| ft_strrchr(**inputs, 'd'))
-		id_conv(args, l_out);
+		l_out = id_conv(args);
 	else if (ft_strrchr(**inputs, 'u'))
-		u_conv(args, l_out);
+		l_out = u_conv(args);
 	else if (ft_strrchr(**inputs, 'x'))
-		x_conv(args, l_out);
+		l_out = x_conv(args);
 	else if (ft_strrchr(**inputs, 'X'))
-		X_conv(args, l_out);
+		l_out = X_conv(args);
 	else if (ft_strrchr(**inputs, '%'))
-		perc_conv(l_out);
+		l_out = perc_conv();
 	(*inputs)++;
+	return (l_out);
 }

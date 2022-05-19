@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 18:20:38 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:42:49 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ char	*hex_concat(char *src, char c);
 void	ft_putnbr_base(unsigned int nbr, char *base, char **output);
 void	ft_putnbr_base_l(unsigned long int nbr, char *base, char **output);
 int		check_base(char *base);
-void	p_conv(va_list arg, int *l_out);
-void	c_conv(va_list arg, int *l_out);
-void	s_conv(va_list arg, int *l_out);
+int		p_conv(va_list arg);
+int		c_conv(va_list arg);
+int		s_conv(va_list arg);
 char	*ft_utoa(unsigned int n);
-void	id_conv(va_list arg, int *l_out);
-void	u_conv(va_list arg, int *l_out);
-void	x_conv(va_list arg, int *l_out);
-void	X_conv(va_list arg, int *l_out);
-void	perc_conv(int *l_out);
+int		id_conv(va_list arg);
+int		u_conv(va_list arg);
+int		x_conv(va_list arg);
+int		X_conv(va_list arg);
+int		perc_conv(void);
 void	m_output(const char *format, char ***inputs, va_list args, int *l_out);
-void	conv_args(va_list args, char ***inputs, int *i_format, int *l_out);
-void	output(const char *format, int start, int end, int *l_out);
+int		conv_args(va_list args, char ***inputs, int *i_format);
+int		output(const char *format, int start, int end);
 
 #endif
