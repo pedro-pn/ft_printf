@@ -6,13 +6,13 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 20:49:51 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:41:52 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	c_conv(va_list arg) // %c
+int	c_conv(va_list arg)
 {
 	unsigned char	c;
 
@@ -21,7 +21,7 @@ int	c_conv(va_list arg) // %c
 	return (1);
 }
 
-int	s_conv(va_list arg) // %s
+int	s_conv(va_list arg)
 {
 	char	*str;
 	char	*output;
@@ -44,7 +44,7 @@ int	s_conv(va_list arg) // %s
 	return (l_out);
 }
 
-int	p_conv(va_list arg) // %p
+int	p_conv(va_list arg)
 {
 	unsigned long int	n;
 	char				*output;
@@ -62,14 +62,14 @@ int	p_conv(va_list arg) // %p
 	output = ft_calloc(3, sizeof(char));
 	output[0] = '0';
 	output[1] = 'x';
-	ft_putnbr_base_l(n, HEXADECIMAL_x, &output);
+	ft_putnbr_base_l(n, HEXADECIMAL_L, &output);
 	ft_putstr_fd(output, 1);
 	l_out = ft_strlen(output);
 	free(output);
 	return (l_out);
 }
 
-int	id_conv(va_list arg) //%d or %i
+int	id_conv(va_list arg)
 {
 	char	*output;
 	int		l_out;
@@ -81,7 +81,7 @@ int	id_conv(va_list arg) //%d or %i
 	return (l_out);
 }
 
-int	u_conv(va_list arg) // %u
+int	u_conv(va_list arg)
 {
 	char	*output;
 	int		l_out;

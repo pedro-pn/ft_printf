@@ -4,7 +4,7 @@ NAME = libftprintf.a
 LIBFT = ./libft/libft.a
 SRCS_PATH = srcs
 OBJS_PATH = objs
-SRCS = ${addprefix ${SRCS_PATH}, ${SOURCES}}
+SRCS = ${addprefix ${SRCS_PATH}/, ${SOURCES}}
 OBJS = ${addprefix ${OBJS_PATH}/, ${SOURCES:.c=.o}}
 FLAG = -g -Werror -Wextra -Wall
 CC = gcc
@@ -41,6 +41,8 @@ re:	clean all
 val: ${NAME}
 	gcc -g main.c -L. -lftprintf && valgrind --leak-check=full ./a.out
 
+norma:
+	norminette ${SRCS}
 		
 
 

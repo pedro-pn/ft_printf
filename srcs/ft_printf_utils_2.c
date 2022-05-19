@@ -6,13 +6,13 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:20:47 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 20:48:31 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:51:57 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	perc_conv(void) // %%
+int	perc_conv(void)
 {
 	ft_putchar_fd('%', 1);
 	return (1);
@@ -22,9 +22,8 @@ int	output(const char *format, int start, int end)
 {
 	char	*s;
 	int		l_out;
-	
-	s = ft_calloc(1, sizeof(char));
-	s = ft_strjoin(s, ft_substr(format, start, end - start));
+
+	s = ft_substr(format, start, end - start);
 	l_out = ft_strlen(s);
 	ft_putstr_fd(s, 1);
 	free(s);

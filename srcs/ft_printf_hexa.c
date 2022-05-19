@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:03:00 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 20:50:07 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:44:41 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_base(char *base)
 	return (counter);
 }
 
-void	ft_putnbr_base(unsigned int nbr, char *base, char **output) //%X or %x
+void	ft_putnbr_base(unsigned int nbr, char *base, char **output)
 {
 	int							mod;
 	unsigned int				quotient;
@@ -75,21 +75,21 @@ int	x_conv(va_list arg)
 	char	*output;
 	int		l_out;
 
-	output = NULL;	
-	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_x, &output);
+	output = NULL;
+	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_L, &output);
 	ft_putstr_fd(output, 1);
 	l_out = ft_strlen(output);
 	free(output);
 	return (l_out);
 }
 
-int	X_conv(va_list arg)
+int	xu_conv(va_list arg)
 {
 	char	*output;
 	int		l_out;
 
-	output = NULL;	
-	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_X, &output);
+	output = NULL;
+	ft_putnbr_base(va_arg(arg, int), HEXADECIMAL_U, &output);
 	ft_putstr_fd(output, 1);
 	l_out = ft_strlen(output);
 	free(output);

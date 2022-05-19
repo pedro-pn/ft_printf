@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 20:42:43 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:44:58 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_printf(const char *format, ...)
 
 	len_out = 0;
 	va_start(args, format);
-	n_input = count_input(format); // contar numero de %
-	inputs = malloc(sizeof(char *) * (n_input + 1)); // alocar ponteiros para cada %
+	n_input = count_input(format);
+	inputs = malloc(sizeof(char *) * (n_input + 1));
 	inputs[n_input] = NULL;
 	fill_inputs(&inputs, format);
 	m_output(format, &inputs, args, &len_out);
@@ -36,7 +36,7 @@ int	ft_printf(const char *format, ...)
 	return (len_out);
 }
 
-int count_input(const char *f_string)
+int	count_input(const char *f_string)
 {
 	int	index;
 	int	counter;
@@ -45,7 +45,7 @@ int count_input(const char *f_string)
 	counter = 0;
 	while (f_string[index])
 	{
-		if (f_string[index] == '%') 
+		if (f_string[index] == '%')
 			counter++;
 		if (ft_strnstr(&f_string[index], "%%", 2))
 			index++;
@@ -58,7 +58,7 @@ void	fill_inputs(char ***inputs, const char *format)
 {
 	int	index;
 	int	start;
-	int end;
+	int	end;
 	int	i_index;
 
 	index = -1;
@@ -83,9 +83,9 @@ void	fill_inputs(char ***inputs, const char *format)
 
 void	m_output(const char *format, char ***inputs, va_list args, int *l_out)
 {
-	int		i_format;
-	int		start;
-	int		end;
+	int	i_format;
+	int	start;
+	int	end;
 
 	i_format = 0;
 	start = -1;
@@ -113,6 +113,7 @@ void	m_output(const char *format, char ***inputs, va_list args, int *l_out)
 int	conv_args(va_list args, char ***inputs, int *i_format)
 {
 	int	l_out;
+
 	*i_format += (ft_strlen(**inputs) - 1);
 	if (ft_strrchr(**inputs, 'c'))
 		l_out = c_conv(args);
@@ -120,15 +121,15 @@ int	conv_args(va_list args, char ***inputs, int *i_format)
 		l_out = s_conv(args);
 	else if (ft_strrchr(**inputs, 'p'))
 		l_out = p_conv(args);
-	else if (ft_strrchr(**inputs, 'i') 
-			|| ft_strrchr(**inputs, 'd'))
+	else if (ft_strrchr(**inputs, 'i')
+		|| ft_strrchr(**inputs, 'd'))
 		l_out = id_conv(args);
 	else if (ft_strrchr(**inputs, 'u'))
 		l_out = u_conv(args);
 	else if (ft_strrchr(**inputs, 'x'))
 		l_out = x_conv(args);
 	else if (ft_strrchr(**inputs, 'X'))
-		l_out = X_conv(args);
+		l_out = xu_conv(args);
 	else if (ft_strrchr(**inputs, '%'))
 		l_out = perc_conv();
 	(*inputs)++;
