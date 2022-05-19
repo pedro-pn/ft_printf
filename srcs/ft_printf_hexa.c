@@ -6,11 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:03:00 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/13 22:44:32 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:46:38 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	check_base(char *base)
 {
@@ -43,11 +43,6 @@ void	ft_putnbr_base(unsigned int nbr, char *base, char **output) //%X or %x
 	base_num = check_base(base);
 	if (base_num > 1)
 	{
-		if (nbr < 0)
-		{
-			*output = ft_strdup("-");
-			nbr *= -1;
-		}
 		quotient = nbr / base_num;
 		mod = nbr % base_num;
 		if (quotient != 0)

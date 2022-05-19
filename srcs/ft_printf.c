@@ -6,11 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 21:22:54 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:18:13 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {

@@ -6,11 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 03:26:53 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/13 22:12:28 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:17:57 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 static int	num_alg(unsigned int n)
 {

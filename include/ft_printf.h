@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 20:58:35 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:20:38 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
 int		ft_printf(const char *format, ...);
 int 	count_input(const char *f_string);

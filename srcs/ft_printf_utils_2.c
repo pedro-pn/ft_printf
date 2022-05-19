@@ -6,11 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:20:47 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/17 16:41:11 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:46:54 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	perc_conv(int *l_out) // %%
 {
@@ -38,11 +38,6 @@ void	ft_putnbr_base_l(unsigned long int nbr, char *base, char **output) //%X or 
 	base_num = check_base(base);
 	if (base_num > 1)
 	{
-		if (nbr < 0)
-		{
-			*output = ft_strdup("-");
-			nbr *= -1;
-		}
 		quotient = nbr / base_num;
 		mod = nbr % base_num;
 		if (quotient != 0)
