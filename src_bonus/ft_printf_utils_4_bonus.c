@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 00:09:14 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 19:02:29 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:30:33 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	fill_zero(char	**output, int width)
 {
 	char	*zero;
 	int		l_out;
-	
+
 	l_out = ft_strlen(*output);
 	*output[0] = '0';
 	zero = ft_calloc(width - l_out + 1, sizeof(char));
@@ -38,7 +38,7 @@ void	fill_sharp(char **output, char x)
 void	fill_space(char **output)
 {
 	char	*space;
-	
+
 	space = ft_calloc(2, sizeof(char));
 	space[0] = ' ';
 	*output = ft_strjoin(space, *output);
@@ -47,7 +47,7 @@ void	fill_space(char **output)
 void	fill_plus(char **output)
 {
 	char	*plus;
-	
+
 	plus = ft_calloc(2, sizeof(char));
 	plus[0] = '+';
 	*output = ft_strjoin(plus, *output);

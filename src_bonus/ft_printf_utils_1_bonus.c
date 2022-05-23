@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 19:25:08 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:50:22 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	s_conv(va_list arg, char ***inputs)
 		output = ft_substr(str, 0, precision);
 	else
 		output = ft_strdup(str);
-	l_out = conv_output(inputs, output, 's');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }
@@ -80,7 +80,7 @@ int	p_conv(va_list arg, char ***inputs)
 	output[0] = '0';
 	output[1] = 'x';
 	ft_putnbr_base_l(n, HEXADECIMAL_L, &output);
-	l_out = conv_output(inputs, output, 'p');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }
@@ -89,10 +89,10 @@ int	id_conv(va_list arg, char ***inputs)
 {
 	char	*output;
 	int		l_out;
-	int 	flag;
+	int		flag;
 	int		width;
 	int		nbr;
-	
+
 	flag = -1;
 	nbr = va_arg(arg, int);
 	output = ft_itoa(nbr);
@@ -105,8 +105,7 @@ int	id_conv(va_list arg, char ***inputs)
 		fill_plus(&output);
 	else if (ft_strchr(**inputs, ' ') && nbr >= 0)
 		fill_space(&output);
-
-	l_out = conv_output(inputs, output, 'd');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }
@@ -118,7 +117,7 @@ int	u_conv(va_list arg, char ***inputs)
 
 	output = ft_utoa(va_arg(arg, unsigned int));
 	output = number_precision(inputs, output);
-	l_out = conv_output(inputs, output, 'u');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }

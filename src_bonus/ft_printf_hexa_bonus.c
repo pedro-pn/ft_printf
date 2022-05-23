@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:03:00 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 18:38:44 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:02:05 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	x_conv(va_list arg, char ***inputs)
 	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, '#') && nbr != 0)
 		fill_sharp(&output, 'x');
-	l_out = conv_output(inputs, output, 'x');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }
@@ -99,7 +99,7 @@ int	xu_conv(va_list arg, char ***inputs)
 	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, '#') && nbr != 0)
 		fill_sharp(&output, 'X');
-	l_out = conv_output(inputs, output, 'X');
+	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
 }

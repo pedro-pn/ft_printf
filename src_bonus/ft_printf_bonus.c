@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/20 23:08:19 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:25:16 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	conv_args(va_list args, char ***inputs, int *i_format)
 {
 	int	l_out;
 
+	l_out = 0;
 	*i_format += (ft_strlen(**inputs) - 1);
 	if (ft_strrchr(**inputs, 'c'))
 		l_out = c_conv(args, inputs);

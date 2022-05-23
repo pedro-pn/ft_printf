@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:20:47 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/20 23:54:20 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:50:04 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	output(const char *format, int start, int end)
 	return (l_out);
 }
 
-int	conv_output(char ***inputs, char *output, char type)
+int	pad_output(char ***inputs, char *output)
 {
 	int	l_out;
 
@@ -38,11 +38,11 @@ int	conv_output(char ***inputs, char *output, char type)
 	if (ft_strchr(**inputs, '-'))
 	{
 		ft_putstr_fd(output, 1);
-		l_out += width_conv(inputs, l_out, type);
+		l_out += width_conv(inputs, l_out);
 	}
 	else
 	{
-		l_out += width_conv(inputs, l_out, type);
+		l_out += width_conv(inputs, l_out);
 		ft_putstr_fd(output, 1);
 	}
 	return (l_out);

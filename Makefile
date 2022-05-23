@@ -1,11 +1,11 @@
-SOURCES = 	ft_printf.c ft_printf_utils_1.c ft_printf_hexa.c ft_utoa.c \
-			ft_printf_utils_2.c
+SOURCES = 		ft_printf.c ft_printf_utils_1.c ft_printf_hexa.c ft_utoa.c \
+				ft_printf_utils_2.c
 SOURCES_BONUS = ft_printf_bonus.c ft_printf_utils_1_bonus.c \
 				ft_printf_hexa_bonus.c ft_utoa_bonus.c \
 				ft_printf_utils_2_bonus.c ft_printf_utils_3_bonus.c \
 				ft_printf_utils_4_bonus.c
 NAME = libftprintf.a
-BONUS = libftprintf.a
+BONUS = libftprintf_bonus.a
 LIBFT = ./libft/libft.a
 SRCS_PATH = srcs
 OBJS_PATH = objs
@@ -20,7 +20,7 @@ CC = gcc
 all: ${NAME}
 
 bonus: ${BONUS}
-
+		
 ${OBJS_PATH}/%.o:	${SRCS_PATH}/%.c
 					@ mkdir -p objs
 					@ ${CC} ${FLAG} -c -o $@ $<
@@ -38,6 +38,7 @@ ${BONUS}: ${OBJS_BONUS} ${LIBFT}
 		@ cp ${LIBFT} .
 		@ mv libft.a ${BONUS}
 		@ ar -rcs ${BONUS} ${OBJS_BONUS}
+		@ cp ${BONUS} ${NAME}
 
 ${LIBFT}:
 		@ make -C ./libft
@@ -53,9 +54,9 @@ clean:
 
 fclean: clean
 		@ make fclean -C ./libft
-		@ rm -f ${NAME} *.a
+		@ rm -f ${NAME} ${BONUS}
 
-re:	clean all
+re:	fclean all
 
 .PHONY: all clean fclean re bonus
 
@@ -63,7 +64,7 @@ val: ${NAME}
 	gcc -g main.c -L. -lftprintf && valgrind --leak-check=full ./a.out
 
 norma:
-	norminette ${SRCS}
+	norminette ${SRCS} ${SRCS_BONUS}
 		
 
 
