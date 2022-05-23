@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/21 03:01:30 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:25:08 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,21 @@ int	id_conv(va_list arg, char ***inputs)
 	int		l_out;
 	int 	flag;
 	int		width;
-	char	*zero;
+	int		nbr;
 	
 	flag = -1;
-	output = ft_itoa(va_arg(arg, int));
+	nbr = va_arg(arg, int);
+	output = ft_itoa(nbr);
 	l_out = ft_strlen(output);
 	width = width_get(inputs, &flag);
 	if (flag == 0 && output[0] == '-' && width > l_out)
-	{
-		output[0] = '0';
-		zero = ft_calloc(width - l_out + 1, sizeof(char));
-		ft_memset(zero, '0', width - l_out);
-		zero[0] = '-';
-		output = ft_strjoin(zero, output);
-	}
-	else // checar sem o else
-		output = number_precision(inputs, output);
+		fill_zero(&output, width);
+	output = number_precision(inputs, output);
+	if (ft_strchr(**inputs, '+') && nbr >= 0)
+		fill_plus(&output);
+	else if (ft_strchr(**inputs, ' ') && nbr >= 0)
+		fill_space(&output);
+
 	l_out = conv_output(inputs, output, 'd');
 	free(output);
 	return (l_out);

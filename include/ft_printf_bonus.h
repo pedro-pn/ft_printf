@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/21 00:50:53 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:02:50 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ void	ft_putnbr_base(unsigned int nbr, char *base, char **output);
 void	ft_putnbr_base_l(unsigned long int nbr, char *base, char **output);
 int		check_base(char *base);
 char	*ft_utoa(unsigned int n);
-int	width_conv(char ***inputs, int l_out);
-int	width_get(char ***inputs, int *flag);
-int	conv_output(char ***inputs, char *output, char type);
-int	check_zero(char ***inputs, char *nbr);
-int	check_precision(char ***inputs);
+int		width_conv(char ***inputs, int l_out);
+int		width_get(char ***inputs, int *flag);
+int		conv_output(char ***inputs, char *output, char type);
+int		check_zero(char ***inputs, char *nbr);
+int		check_precision(char ***inputs);
 char	*number_precision(char ***inputs, char *output);
+void	fill_sharp(char **output, char x);
+void	fill_zero(char **output, int width);
+void	fill_space(char **output);
+void	fill_plus(char **output);
 
 #endif

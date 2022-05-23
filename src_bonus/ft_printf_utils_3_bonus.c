@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/21 02:55:55 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:26:00 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	width_conv(char ***inputs, int l_out)
 	flag = -1;
 	counter = 0;
 	i = width_get(inputs, &flag);
-	// if (flag == 0 && (ft_strchr(NUMERICAL, type)))
-	// 	return (i);
 	while (counter < i - l_out && i > l_out)
 	{
 		if (flag == 0)
@@ -67,10 +65,7 @@ int	width_get(char ***inputs, int *flag)
 int	check_zero(char ***inputs, char *nbr)
 {
 	if (nbr[0] == '0' && (!ft_strchr(**inputs, '-')
-		 || !ft_strchr(**inputs, '.'))
-		&& (ft_strrchr(**inputs, 'd') // talvez seja undefined behavior
-		|| ft_strrchr(**inputs, 'i') || ft_strrchr(**inputs, 'x')
-		|| ft_strrchr(**inputs, 'u') || ft_strrchr(**inputs, 'X'))) // talvez não seja necessario
+		 || !ft_strchr(**inputs, '.')))
 		return (0);
 	return (-1);
 }

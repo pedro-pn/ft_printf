@@ -2,9 +2,10 @@ SOURCES = 	ft_printf.c ft_printf_utils_1.c ft_printf_hexa.c ft_utoa.c \
 			ft_printf_utils_2.c
 SOURCES_BONUS = ft_printf_bonus.c ft_printf_utils_1_bonus.c \
 				ft_printf_hexa_bonus.c ft_utoa_bonus.c \
-				ft_printf_utils_2_bonus.c ft_printf_utils_3_bonus.c
+				ft_printf_utils_2_bonus.c ft_printf_utils_3_bonus.c \
+				ft_printf_utils_4_bonus.c
 NAME = libftprintf.a
-BONUS = libftprintf_bonus.a
+BONUS = libftprintf.a
 LIBFT = ./libft/libft.a
 SRCS_PATH = srcs
 OBJS_PATH = objs
