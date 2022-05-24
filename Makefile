@@ -64,7 +64,7 @@ val: ${NAME}
 	gcc -g main.c -L. -lftprintf && valgrind --leak-check=full ./a.out
 
 norma:
-	norminette ${SRCS} ${SRCS_BONUS}
+	norminette ${SRCS} ${SRCS_BONUS} ${INCLUDE} include/
 		
 
 

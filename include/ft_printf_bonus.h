@@ -6,12 +6,12 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 20:57:02 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:03:56 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 # define CONV_TYPE "cspdiuxX%"
 # define HEXADECIMAL_U "0123456789ABCDEF"
 # define HEXADECIMAL_L "0123456789abcdef"
@@ -24,7 +24,7 @@
 
 int		ft_printf(const char *format, ...);
 // get conversion specification functions
-int 	count_input(const char *f_string);
+int		count_input(const char *f_string);
 void	fill_inputs(char ***inputs, const char *format);
 // format and output string functions
 void	m_output(const char *format, char ***inputs, va_list args, int *l_out);
