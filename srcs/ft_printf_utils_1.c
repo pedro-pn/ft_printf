@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/19 21:41:52 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:23:13 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,16 @@ int	c_conv(va_list arg)
 int	s_conv(va_list arg)
 {
 	char	*str;
-	char	*output;
 	int		l_out;
 
-	output = NULL;
 	str = va_arg(arg, char *);
 	if (!str)
 	{
-		output = ft_strdup("(null)");
-		ft_putstr_fd(output, 1);
-		l_out = ft_strlen(output);
-		free(output);
-		return (l_out);
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
-	output = ft_strdup(str);
-	ft_putstr_fd(output, 1);
-	l_out = ft_strlen(output);
-	free(output);
+	ft_putstr_fd(str, 1);
+	l_out = ft_strlen(str);
 	return (l_out);
 }
 
@@ -53,11 +46,8 @@ int	p_conv(va_list arg)
 	n = (unsigned long int) va_arg(arg, void *);
 	if (!n)
 	{
-		output = ft_strdup("(nil)");
-		ft_putstr_fd(output, 1);
-		l_out = ft_strlen(output);
-		free(output);
-		return (l_out);
+		ft_putstr_fd("(nil)", 1);
+		return (5);
 	}
 	output = ft_calloc(3, sizeof(char));
 	output[0] = '0';

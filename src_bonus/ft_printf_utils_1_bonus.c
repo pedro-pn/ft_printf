@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 20:50:22 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:40:07 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ int	s_conv(va_list arg, char ***inputs)
 	precision = -1;
 	if (!str)
 	{
-		output = ft_strdup("(null)");
-		ft_putstr_fd(output, 1);
-		l_out = ft_strlen(output);
-		free(output);
-		return (l_out);
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
 	if (ft_strchr(**inputs, '.'))
 		precision = check_precision(inputs);
@@ -70,11 +67,8 @@ int	p_conv(va_list arg, char ***inputs)
 	n = (unsigned long int) va_arg(arg, void *);
 	if (!n)
 	{
-		output = ft_strdup("(nil)");
-		ft_putstr_fd(output, 1);
-		l_out = ft_strlen(output);
-		free(output);
-		return (l_out);
+		ft_putstr_fd("(nil)", 1);
+		return (5);
 	}
 	output = ft_calloc(3, sizeof(char));
 	output[0] = '0';
