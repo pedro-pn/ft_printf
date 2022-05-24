@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:03:00 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 21:02:05 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:36:12 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,21 @@ int	x_conv(va_list arg, char ***inputs)
 	char	*output;
 	int		l_out;
 	int		nbr;
+	int		flag;
+	int		width;
 
 	output = NULL;
+	flag = -1;
 	nbr = va_arg(arg, int);
 	ft_putnbr_base(nbr, HEXADECIMAL_L, &output);
 	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, '#') && nbr != 0)
 		fill_sharp(&output, 'x');
+	l_out = ft_strlen(output);
+	flag = check_zero(inputs);
+	width = width_get(inputs);
+	if (flag == 0 && ft_strchr(**inputs, '#') && width > l_out)
+		fill_zero_x(&output, width, 'x');
 	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
@@ -92,6 +100,8 @@ int	xu_conv(va_list arg, char ***inputs)
 	char	*output;
 	int		l_out;
 	int		nbr;
+	int		flag;
+	int		width;
 
 	output = NULL;
 	nbr = va_arg(arg, int);
@@ -99,6 +109,11 @@ int	xu_conv(va_list arg, char ***inputs)
 	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, '#') && nbr != 0)
 		fill_sharp(&output, 'X');
+	l_out = ft_strlen(output);
+	flag = check_zero(inputs);
+	width = width_get(inputs);
+	if (flag == 0 && ft_strchr(**inputs, '#') && width > l_out)
+		fill_zero_x(&output, width, 'X');
 	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);

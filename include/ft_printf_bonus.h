@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/24 17:03:56 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:32:50 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 # define CONV_TYPE "cspdiuxX%"
 # define HEXADECIMAL_U "0123456789ABCDEF"
 # define HEXADECIMAL_L "0123456789abcdef"
-# define DECIMAL "0123456789"
+# define DECIMAL_0 "0123456789"
+# define DECIMAL "1234546789"
 
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
+# include <stdio.h>
 
 int		ft_printf(const char *format, ...);
 // get conversion specification functions
@@ -48,10 +50,11 @@ int		check_base(char *base);
 char	*ft_utoa(unsigned int n);
 // [width field] and [flags: '-0']
 int		width_conv(char ***inputs, int l_out);
-int		width_get(char ***inputs, int *flag);
+int		width_get(char ***inputs);
 int		pad_output(char ***inputs, char *output);
-int		check_zero(char ***inputs, char *nbr);
-void	fill_zero(char **output, int width);
+int		check_zero(char ***inputs);
+void	fill_zero(char **output, int width, char sign);
+void	fill_zero_x(char **output, int width, char x);
 // [.precision]
 int		check_precision(char ***inputs);
 char	*number_precision(char ***inputs, char *output);

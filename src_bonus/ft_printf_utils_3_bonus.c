@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 20:30:05 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:39:43 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	width_conv(char ***inputs, int l_out)
 	i = 0;
 	flag = -1;
 	counter = 0;
-	i = width_get(inputs, &flag);
+	i = width_get(inputs);
+	flag = check_zero(inputs);
 	while (counter < i - l_out && i > l_out)
 	{
 		if (flag == 0)
@@ -33,7 +34,7 @@ int	width_conv(char ***inputs, int l_out)
 	return (counter);
 }
 
-int	width_get(char ***inputs, int *flag)
+int	width_get(char ***inputs)
 {
 	int		width;
 	int		index;
@@ -47,10 +48,9 @@ int	width_get(char ***inputs, int *flag)
 	{
 		if (ft_strchr(DECIMAL, (**inputs)[index]) && start == -1)
 			start = index;
-		if ((!ft_strchr(DECIMAL, (**inputs)[index + 1])) && start != -1)
+		if ((!ft_strchr(DECIMAL_0, (**inputs)[index + 1])) && start != -1)
 		{
 			nbr = ft_substr(**inputs, start, index - start + 1);
-			*flag = check_zero(inputs, nbr);
 			width = ft_atoi(nbr);
 			free(nbr);
 			break ;
@@ -62,11 +62,22 @@ int	width_get(char ***inputs, int *flag)
 	return (width);
 }
 
-int	check_zero(char ***inputs, char *nbr)
+int	check_zero(char ***inputs)
 {
-	if (nbr[0] == '0' && (!ft_strchr(**inputs, '-')
-			|| !ft_strchr(**inputs, '.')))
-		return (0);
+	int	index;
+
+	index = 0;
+	if (!ft_strchr(**inputs, '-') && !check_precision(inputs))
+	{
+		while ((**inputs)[index])
+		{
+			if (ft_strchr(DECIMAL, (**inputs)[index]))
+				break ;
+			if ((**inputs)[index] == '0')
+				return (0);
+			index++;
+		}
+	}
 	return (-1);
 }
 
@@ -80,14 +91,14 @@ int	check_precision(char ***inputs)
 	index = 0;
 	start = -1;
 	width = 0;
-	while ((**inputs)[index] != '.')
+	while ((**inputs)[index] != '.' && (**inputs)[index + 1])
 		index++;
 	index++;
 	while ((**inputs)[index])
 	{
-		if (ft_strchr(DECIMAL, (**inputs)[index]) && start == -1)
+		if (ft_strchr(DECIMAL_0, (**inputs)[index]) && start == -1)
 			start = index;
-		if ((!ft_strchr(DECIMAL, (**inputs)[index + 1])) && start != -1)
+		if ((!ft_strchr(DECIMAL_0, (**inputs)[index + 1])) && start != -1)
 		{
 			nbr = ft_substr(**inputs, start, index - start + 1);
 			width = ft_atoi(nbr);
