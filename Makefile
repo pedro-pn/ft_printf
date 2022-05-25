@@ -30,6 +30,7 @@ ${OBJS_PATH}/%.o:	${BONUS_PATH}/%.c
 					@ ${CC} ${FLAG} -c -o $@ $<
 
 ${NAME}: ${OBJS} ${LIBFT}
+		@ rm -f ${BONUS}
 		@ cp ${LIBFT} .
 		@ mv libft.a ${NAME}
 		@ ar -rcs ${NAME} ${OBJS}
