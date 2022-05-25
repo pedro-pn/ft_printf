@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/24 21:00:39 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:28:35 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,19 @@ int	s_conv(va_list arg, char ***inputs)
 	output = NULL;
 	str = va_arg(arg, char *);
 	precision = -1;
-	if (!str)
-	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
-	}
 	if (ft_strchr(**inputs, '.'))
 		precision = check_precision(inputs);
-	if ((int) ft_strlen(str) > precision && precision != -1)
-		output = ft_substr(str, 0, precision);
-	else
+	if ((precision == -1 || precision >= 6) && !str)
+		output = ft_strdup("(null)");
+	else if (!str)
+		str = "";
+	if (!output)
 		output = ft_strdup(str);
+	if ((int) ft_strlen(output) > precision && precision != -1)
+	{
+		free(output);
+		output = ft_substr(str, 0, precision);
+	}
 	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
@@ -66,14 +68,14 @@ int	p_conv(va_list arg, char ***inputs)
 
 	n = (unsigned long int) va_arg(arg, void *);
 	if (!n)
+		output = ft_strdup("(nil)");
+	else
 	{
-		ft_putstr_fd("(nil)", 1);
-		return (5);
+		output = ft_calloc(3, sizeof(char));
+		output[0] = '0';
+		output[1] = 'x';
+		ft_putnbr_base_l(n, HEXADECIMAL_L, &output);
 	}
-	output = ft_calloc(3, sizeof(char));
-	output[0] = '0';
-	output[1] = 'x';
-	ft_putnbr_base_l(n, HEXADECIMAL_L, &output);
 	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);
