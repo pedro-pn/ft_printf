@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/24 21:39:43 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:07:55 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,16 @@ int	check_precision(char ***inputs)
 	index = 0;
 	start = -1;
 	width = 0;
-	while ((**inputs)[index] != '.' && (**inputs)[index + 1])
-		index++;
-	index++;
-	while ((**inputs)[index])
+	nbr = ft_strchr(**inputs, '.');
+	if (!nbr)
+		return (-1);
+	while ((nbr)[index])
 	{
-		if (ft_strchr(DECIMAL_0, (**inputs)[index]) && start == -1)
+		if (ft_strchr(DECIMAL_0, (nbr)[index]) && start == -1)
 			start = index;
-		if ((!ft_strchr(DECIMAL_0, (**inputs)[index + 1])) && start != -1)
+		if ((!ft_strchr(DECIMAL_0, (nbr)[index + 1])) && start != -1)
 		{
-			nbr = ft_substr(**inputs, start, index - start + 1);
+			nbr = ft_substr(nbr, start, index - start + 1);
 			width = ft_atoi(nbr);
 			free(nbr);
 			break ;
