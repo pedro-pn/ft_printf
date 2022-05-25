@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/24 19:16:14 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:29:44 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,20 @@ int	count_input(const char *f_string)
 {
 	int	index;
 	int	counter;
+	int	i_perc;
 
 	index = 0;
 	counter = 0;
+	i_perc = -1;
 	while (f_string[index])
 	{
-		if (f_string[index] == '%')
-			counter++;
-		if (ft_strnstr(&f_string[index], "%%", 2))
-			index++;
+		if (f_string[index] == '%' && i_perc == -1)
+			i_perc = index;
+		else if (ft_strchr(CONV_TYPE, f_string[index]) && i_perc != -1)
+		{
+			counter++;	
+			i_perc = -1;
+		}
 		index++;
 	}
 	return (counter);
