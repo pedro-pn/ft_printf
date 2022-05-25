@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/25 18:07:55 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:35:14 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_zero(char ***inputs)
 	int	index;
 
 	index = 0;
-	if (!ft_strchr(**inputs, '-') && !check_precision(inputs))
+	if (!ft_strchr(**inputs, '-') && check_precision(inputs) == -1)
 	{
 		while ((**inputs)[index])
 		{
@@ -116,10 +116,10 @@ char	*number_precision(char ***inputs, char *output)
 	char	*zero;
 	int		l_out;
 
-	precision = 0;
-	if (ft_strchr(**inputs, '.'))
-		precision = check_precision(inputs);
+	precision = check_precision(inputs);
 	l_out = ft_strlen(output);
+	if (l_out == 1 && output[0] == '0' && precision == 0)
+		output[0] = 0;
 	if (output[0] == '-')
 		l_out--;
 	if ((int) l_out < precision)
