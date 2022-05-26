@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/25 17:28:35 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:48:54 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	s_conv(va_list arg, char ***inputs)
 
 	output = NULL;
 	str = va_arg(arg, char *);
-	precision = -1;
-	if (ft_strchr(**inputs, '.'))
-		precision = check_precision(inputs);
+	precision = check_precision(inputs);
 	if ((precision == -1 || precision >= 6) && !str)
 		output = ft_strdup("(null)");
 	else if (!str)
@@ -95,13 +93,13 @@ int	id_conv(va_list arg, char ***inputs)
 	l_out = ft_strlen(output);
 	width = width_get(inputs);
 	flag = check_zero(inputs);
-	if (flag == 0 && output[0] == '-' && width > l_out)
-		fill_zero(&output, width, '-');
-	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, '+') && nbr >= 0)
 		fill_plus(&output);
+	if (flag == 0 && output[0] == '-' && width > l_out)
+		fill_zero(&output, width, '-');
 	if (flag == 0 && output[0] == '+' && width > l_out)
 		fill_zero(&output, width, '+');
+	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, ' ') && nbr >= 0)
 		fill_space(&output);
 	l_out = pad_output(inputs, output);

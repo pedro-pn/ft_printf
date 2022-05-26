@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/25 18:35:14 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:50:56 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,16 @@ char	*number_precision(char ***inputs, char *output)
 	l_out = ft_strlen(output);
 	if (l_out == 1 && output[0] == '0' && precision == 0)
 		output[0] = 0;
-	if (output[0] == '-')
+	if (output[0] == '-' || output[0] == '+')
 		l_out--;
 	if ((int) l_out < precision)
 	{
 		zero = ft_calloc(precision - l_out + 1, sizeof(char));
 		ft_memset(zero, '0', precision - l_out);
-		if (output[0] == '-')
+		if (output[0] == '-' || output[0] == '+')
 		{
+			zero[0] = output[0];
 			output[0] = '0';
-			zero[0] = '-';
 		}
 		output = ft_strjoin(zero, output);
 	}
