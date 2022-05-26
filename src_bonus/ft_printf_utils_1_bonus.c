@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:37:05 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/26 15:48:54 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:19:18 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	id_conv(va_list arg, char ***inputs)
 	int		width;
 	int		nbr;
 
-	flag = -1;
 	nbr = va_arg(arg, int);
 	output = ft_itoa(nbr);
 	l_out = ft_strlen(output);
@@ -102,6 +101,8 @@ int	id_conv(va_list arg, char ***inputs)
 	output = number_precision(inputs, output);
 	if (ft_strchr(**inputs, ' ') && nbr >= 0)
 		fill_space(&output);
+	if (flag == 0 && output[0] == ' ' && width > l_out)
+		fill_zero(&output, width, ' ');
 	l_out = pad_output(inputs, output);
 	free(output);
 	return (l_out);

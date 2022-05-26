@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 00:09:14 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/24 21:39:24 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:07:02 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ void	fill_space(char **output)
 {
 	char	*space;
 
-	space = ft_calloc(2, sizeof(char));
-	space[0] = ' ';
-	*output = ft_strjoin(space, *output);
+	if (!ft_strchr(*output, '+'))
+	{
+		space = ft_calloc(2, sizeof(char));
+		space[0] = ' ';
+		*output = ft_strjoin(space, *output);
+	}
 }
 
 void	fill_plus(char **output)
