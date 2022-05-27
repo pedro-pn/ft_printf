@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/27 18:28:28 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 19:28:43 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# include <stdio.h>
 
 enum e_flags {minus = 1, zero = 2, dot = 4, sharp = 8, space = 16, plus = 32};
 
@@ -65,7 +64,7 @@ int		width_get(char ***inputs);
 int		pad_output(t_flags flags, char *output);
 int		check_zero(char ***inputs);
 void	fill_zero(char **output, int width, char sign);
-void	fill_zero_x(char **output, int width, char x);
+void	fill_zero_x(char **output, int width);
 // [.precision]
 int		check_precision(char ***inputs);
 char	*number_precision(t_flags flags, char *output);
