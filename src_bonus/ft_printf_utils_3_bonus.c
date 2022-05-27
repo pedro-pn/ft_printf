@@ -6,26 +6,20 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/26 15:50:56 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:17:42 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf_bonus.h"
 
-int	width_conv(char ***inputs, int l_out)
+int	width_conv(t_flags flags, int l_out)
 {
-	int	i;
 	int	counter;
-	int	flag;
 
-	i = 0;
-	flag = -1;
 	counter = 0;
-	i = width_get(inputs);
-	flag = check_zero(inputs);
-	while (counter < i - l_out && i > l_out)
+	while (counter < flags.width - l_out && flags.width > l_out)
 	{
-		if (flag == 0)
+		if (flags.flags & zero)
 			ft_putchar_fd('0', 1);
 		else
 			ft_putchar_fd(' ', 1);
@@ -67,18 +61,15 @@ int	check_zero(char ***inputs)
 	int	index;
 
 	index = 0;
-	if (!ft_strchr(**inputs, '-') && check_precision(inputs) == -1)
+	while ((**inputs)[index])
 	{
-		while ((**inputs)[index])
-		{
-			if (ft_strchr(DECIMAL, (**inputs)[index]))
-				break ;
-			if ((**inputs)[index] == '0')
-				return (0);
-			index++;
-		}
+		if (ft_strchr(DECIMAL, (**inputs)[index]))
+			break ;
+		if ((**inputs)[index] == '0')
+			return (1);
+		index++;
 	}
-	return (-1);
+	return (0);
 }
 
 int	check_precision(char ***inputs)
@@ -110,28 +101,26 @@ int	check_precision(char ***inputs)
 	return (width);
 }
 
-char	*number_precision(char ***inputs, char *output)
+char	*number_precision(t_flags flags, char *output)
 {
-	int		precision;
-	char	*zero;
+	char	*s_zero;
 	int		l_out;
 
-	precision = check_precision(inputs);
 	l_out = ft_strlen(output);
-	if (l_out == 1 && output[0] == '0' && precision == 0)
+	if (l_out == 1 && output[0] == '0' && (flags.precision == 0))
 		output[0] = 0;
 	if (output[0] == '-' || output[0] == '+')
 		l_out--;
-	if ((int) l_out < precision)
+	if ((int) l_out < flags.precision)
 	{
-		zero = ft_calloc(precision - l_out + 1, sizeof(char));
-		ft_memset(zero, '0', precision - l_out);
+		s_zero = ft_calloc(flags.precision - l_out + 1, sizeof(char));
+		ft_memset(s_zero, '0', flags.precision - l_out);
 		if (output[0] == '-' || output[0] == '+')
 		{
-			zero[0] = output[0];
+			s_zero[0] = output[0];
 			output[0] = '0';
 		}
-		output = ft_strjoin(zero, output);
+		output = ft_strjoin(s_zero, output);
 	}
 	return (output);
 }

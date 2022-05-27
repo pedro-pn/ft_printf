@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:20:47 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/23 20:50:04 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:27:47 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ int	output(const char *format, int start, int end)
 	return (l_out);
 }
 
-int	pad_output(char ***inputs, char *output)
+int	pad_output(t_flags flags, char *output)
 {
 	int	l_out;
 
 	l_out = ft_strlen(output);
-	if (ft_strchr(**inputs, '-'))
+	if (flags.flags & minus)
 	{
 		ft_putstr_fd(output, 1);
-		l_out += width_conv(inputs, l_out);
+		l_out += width_conv(flags, l_out);
 	}
 	else
 	{
-		l_out += width_conv(inputs, l_out);
+		l_out += width_conv(flags, l_out);
 		ft_putstr_fd(output, 1);
 	}
 	return (l_out);
@@ -69,4 +69,24 @@ void	ft_putnbr_base_l(unsigned long int nbr, char *base, char **output)
 		else
 			(*output) = hex_concat(*output, base[mod]);
 	}
+}
+
+void	get_flags(char ***inputs, t_flags *flags)
+{
+	flags->flags = 0;
+	flags->precision = check_precision(inputs);
+	flags->width = width_get(inputs);
+	if (ft_strchr(**inputs, '-'))
+		flags->flags += minus;
+	if (flags->precision != -1)
+		flags->flags += dot;
+	if (ft_strchr(**inputs, '+'))
+		flags->flags += plus;
+	if (ft_strchr(**inputs, '#'))
+		flags->flags += sharp;
+	if (ft_strchr(**inputs, ' ') && !(flags->flags & plus))
+		flags->flags += space;
+	if (check_zero(inputs) && !(flags->flags & dot)
+		&& !(flags->flags & minus))
+		flags->flags += zero;
 }

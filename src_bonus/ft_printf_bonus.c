@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:27:39 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/25 18:10:48 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:41:24 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,25 +118,27 @@ void	m_output(const char *format, char ***inputs, va_list args, int *l_out)
 
 int	conv_args(va_list args, char ***inputs, int *i_format)
 {
-	int	l_out;
+	int			l_out;
+	t_flags		flags;
 
 	l_out = 0;
 	*i_format += (ft_strlen(**inputs) - 1);
+	get_flags(inputs, &flags);
 	if (ft_strrchr(**inputs, 'c'))
-		l_out = c_conv(args, inputs);
+		l_out = c_conv(args, flags);
 	else if (ft_strrchr(**inputs, 's'))
-		l_out = s_conv(args, inputs);
+		l_out = s_conv(args, flags);
 	else if (ft_strrchr(**inputs, 'p'))
-		l_out = p_conv(args, inputs);
+		l_out = p_conv(args, flags);
 	else if (ft_strrchr(**inputs, 'i')
 		|| ft_strrchr(**inputs, 'd'))
-		l_out = id_conv(args, inputs);
+		l_out = id_conv(args, flags);
 	else if (ft_strrchr(**inputs, 'u'))
-		l_out = u_conv(args, inputs);
+		l_out = u_conv(args, flags);
 	else if (ft_strrchr(**inputs, 'x'))
-		l_out = x_conv(args, inputs);
+		l_out = x_conv(args, flags);
 	else if (ft_strrchr(**inputs, 'X'))
-		l_out = xu_conv(args, inputs);
+		l_out = xu_conv(args, flags);
 	else if (ft_strrchr(**inputs, '%'))
 		l_out = perc_conv();
 	(*inputs)++;
