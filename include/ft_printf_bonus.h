@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:28:18 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/27 19:28:43 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 23:18:40 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define CONV_TYPE "cspdiuxX%"
 # define HEXADECIMAL_U "0123456789ABCDEF"
 # define HEXADECIMAL_L "0123456789abcdef"
-# define DECIMAL_0 "0123456789"
 # define DECIMAL "1234546789"
 
 # include <unistd.h>

@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:35:04 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/27 18:17:42 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/27 23:17:39 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	width_get(char ***inputs)
 	{
 		if (ft_strchr(DECIMAL, (**inputs)[index]) && start == -1)
 			start = index;
-		if ((!ft_strchr(DECIMAL_0, (**inputs)[index + 1])) && start != -1)
+		if ((!ft_isdigit((**inputs)[index + 1])) && start != -1)
 		{
 			nbr = ft_substr(**inputs, start, index - start + 1);
 			width = ft_atoi(nbr);
@@ -87,9 +87,9 @@ int	check_precision(char ***inputs)
 		return (-1);
 	while ((nbr)[index])
 	{
-		if (ft_strchr(DECIMAL_0, (nbr)[index]) && start == -1)
+		if (ft_isdigit(nbr[index]) && start == -1)
 			start = index;
-		if ((!ft_strchr(DECIMAL_0, (nbr)[index + 1])) && start != -1)
+		if ((!ft_isdigit(nbr[index + 1])) && start != -1)
 		{
 			nbr = ft_substr(nbr, start, index - start + 1);
 			width = ft_atoi(nbr);

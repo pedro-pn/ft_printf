@@ -48,7 +48,7 @@ tt: 	${NAME}
 		@ gcc main.c -L. -lftprintf && ./a.out
 
 ttb: 	${BONUS}
-		@ gcc main2.c -L. -lftprintf_bonus && ./a.out
+		@ gcc -g main2.c -L. -lftprintf_bonus && ./a.out
 
 clean:
 		@ rm -rf ${OBJS_PATH}
