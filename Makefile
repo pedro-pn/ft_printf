@@ -66,6 +66,3 @@ val: ${NAME}
 
 norma:
 	norminette ${SRCS} ${SRCS_BONUS} ${INCLUDE} include/
-		
-
-

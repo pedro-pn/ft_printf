@@ -105,6 +105,7 @@ char	*number_precision(t_flags flags, char *output)
 {
 	char	*s_zero;
 	int		l_out;
+	char	*temp;
 
 	l_out = ft_strlen(output);
 	if (l_out == 1 && output[0] == '0' && (flags.precision == 0))
@@ -120,7 +121,11 @@ char	*number_precision(t_flags flags, char *output)
 			s_zero[0] = output[0];
 			output[0] = '0';
 		}
-		output = ft_strjoin(s_zero, output);
+		temp = ft_strdup(output);
+		free(output);
+		output = ft_strjoin(s_zero, temp);
+		free(temp);
+		free(s_zero);
 	}
 	return (output);
 }
